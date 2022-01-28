@@ -24,27 +24,27 @@ public class PacienteController {
 
 	@GetMapping
 	// @RequestMapping(value = "/", method = RequestMethod.GET)
-	public List<Paciente> listar() {
+	public List<Paciente> listar() throws Exception {
 		return service.listar();
 	}
 
 	@GetMapping("/{id}")
-	public Paciente listarPorId(@PathVariable("id") Integer id) {
+	public Paciente listarPorId(@PathVariable("id") Integer id) throws Exception {
 		return service.listarPorId(id);
 	}
 
 	@PostMapping
-	public Paciente registrar(@RequestBody Paciente p) {
+	public Paciente registrar(@RequestBody Paciente p) throws Exception {
 		return service.registrar(p);
 	}
 
 	@PutMapping
-	public Paciente modificar(@RequestBody Paciente p) {
+	public Paciente modificar(@RequestBody Paciente p) throws Exception {
 		return service.modificar(p);
 	}
 
 	@DeleteMapping("/{id}")
-	public void eliminar(@PathVariable("id") Integer id) {
+	public void eliminar(@PathVariable("id") Integer id) throws Exception {
 		service.eliminar(id);
 	}
 

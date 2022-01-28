@@ -4821,3 +4821,4 @@ Binding(CTRL+SHIFT+C,
 		,,true),null),
 	org.eclipse.ui.defaultAcceleratorConfiguration,
 	org.eclipse.ui.textEditorScope,,,system)
+Caused by: org.eclipse.lsp4j.jsonrpc.ResponseErrorException: Internal error.

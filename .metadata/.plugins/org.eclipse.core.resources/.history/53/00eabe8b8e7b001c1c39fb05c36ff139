@@ -1,0 +1,14 @@
+package com.mitocode.model;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Medico {
+	private Integer idMedico;
+	private String nombres;
+	private String apellidos;
+	private String cmp;
+	private String fotoUrl;
+	private Integer edad;
+
+}

@@ -1,0 +1,17 @@
+package com.mitocode.model;
+
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+public class ConsultaExamenPK {
+	
+	@ManyToOne
+	@JoinColumn(name = "id_consulta", nullable = false)
+	private Consulta consulta;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_examen", nullable = false)
+	private Examen examen;
+
+}

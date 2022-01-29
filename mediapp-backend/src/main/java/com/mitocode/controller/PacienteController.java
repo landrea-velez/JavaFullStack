@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mitocode.Service.IPacienteService;
+import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Paciente;
 
 @RestController
@@ -36,25 +37,40 @@ public class PacienteController {
 	@GetMapping("/{id}")
 	public ResponseEntity<Paciente> listarPorId(@PathVariable("id") Integer id) throws Exception {
 		Paciente paciente = service.listarPorId(id);
+		if (paciente == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO" + id);
+		}
+
 		return new ResponseEntity<>(paciente, HttpStatus.OK);
 	}
 
 	@PostMapping
 	public ResponseEntity<Void> registrar(@RequestBody Paciente p) throws Exception {
 		Paciente paciente = service.registrar(p);
-		//localhost:8080/pacientes/5
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(paciente.getIdPaciente()).toUri();
-		return  ResponseEntity.created(location).build();
+		// localhost:8080/pacientes/5
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(paciente.getIdPaciente()).toUri();
+		return ResponseEntity.created(location).build();
 	}
 
 	@PutMapping
 	public ResponseEntity<Paciente> modificar(@RequestBody Paciente p) throws Exception {
-		Paciente paciente = service.modificar(p);
-		return new ResponseEntity<>(paciente, HttpStatus.OK);
+		Paciente paciente = service.listarPorId(p.getIdPaciente());
+
+		if (paciente == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO" + p.getIdPaciente());
+		}
+		Paciente pac = service.modificar(p);
+		return new ResponseEntity<>(pac, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable("id") Integer id) throws Exception {
+		Paciente paciente = service.listarPorId(id);
+
+		if (paciente == null) {
+			throw new ModeloNotFoundException("ID NO ENCONTRADO" + id);
+		}
 		service.eliminar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

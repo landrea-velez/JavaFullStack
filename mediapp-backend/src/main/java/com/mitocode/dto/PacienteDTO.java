@@ -1,6 +1,7 @@
 package com.mitocode.dto;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -9,9 +10,11 @@ public class PacienteDTO {
 	private Integer idPaciente;
 
 	@NotNull
-	@Size(min = 3)
+	@Size(min = 3, message = "{nombres.size}")
 	private String nombres;
 
+	@NotNull
+	@Size(min = 3, message = "{apellidos.size}")
 	private String apellidos;
 
 	@NotNull
@@ -26,7 +29,7 @@ public class PacienteDTO {
 	private String telefono;
 
 	@Email
-	@NotNull
+	@NotEmpty
 	private String email;
 
 	public Integer getIdPaciente() {

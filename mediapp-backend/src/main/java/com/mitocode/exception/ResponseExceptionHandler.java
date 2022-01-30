@@ -39,8 +39,7 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 		String message = ex.getBindingResult().getAllErrors().stream().map(e -> e.getDefaultMessage().concat(", "))
 				.collect(Collectors.joining());
 
-		ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), message,
-				request.getDescription(false));
+		ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), message, request.getDescription(false));
 		return new ResponseEntity<>(er, HttpStatus.BAD_REQUEST);
 	}
 

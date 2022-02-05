@@ -1,5 +1,8 @@
 package com.mitocode.controller;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,6 +15,7 @@ import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,13 +29,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.mitocode.Service.IPacienteService;
 import com.mitocode.dto.PacienteDTO;
 import com.mitocode.exception.ModeloNotFoundException;
-import com.mitocode.model.Paciente;
-
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
-import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;;
+import com.mitocode.model.Paciente;;
 
 @RestController
 @RequestMapping("/pacientes")
+//@CrossOrigin(origins = "http://localhost:4200")
 public class PacienteController {
 
 	@Autowired

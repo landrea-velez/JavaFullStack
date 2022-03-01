@@ -3,6 +3,8 @@ package com.mitocode.controller;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,15 +24,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mitocode.Service.IConsultaService;
 import com.mitocode.dto.ConsultaDTO;
 import com.mitocode.dto.ConsultaListaExamenDTO;
+import com.mitocode.dto.ConsultaResumenDTO;
+import com.mitocode.dto.FiltroConsultaDTO;
 import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Consulta;
 import com.mitocode.model.Examen;
-import com.mitocode.Service.IConsultaService;
-
 
 @RestController
 @RequestMapping("/consultas")
@@ -38,91 +42,125 @@ public class ConsultaController {
 
 	@Autowired
 	private IConsultaService service;
-	
+
 	@Autowired
 	private ModelMapper mapper;
-	
+
 	@GetMapping
-	//@RequestMapping(value = "/" , method = RequestMethod.GET)
+	// @RequestMapping(value = "/" , method = RequestMethod.GET)
 	public ResponseEntity<List<ConsultaDTO>> listar() throws Exception {
-		List<ConsultaDTO> lista = service.listar().stream().map(p -> mapper.map(p, ConsultaDTO.class)).collect(Collectors.toList());
-		
+		List<ConsultaDTO> lista = service.listar().stream().map(p -> mapper.map(p, ConsultaDTO.class))
+				.collect(Collectors.toList());
+
 		return new ResponseEntity<>(lista, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<ConsultaDTO> listarPorId(@PathVariable("id") Integer id) throws Exception {
 		Consulta obj = service.listarPorId(id);
-		
-		if(obj == null) {
+
+		if (obj == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO " + id);
 		}
-						
+
 		ConsultaDTO dto = mapper.map(obj, ConsultaDTO.class);
-		
+
 		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
-	
-	/*@PostMapping
-	public ResponseEntity<Consulta> registrar(@RequestBody Consulta p) throws Exception {
-		Consulta obj = service.registrar(p);
-		return new ResponseEntity<>(obj, HttpStatus.CREATED);
-	}*/
-	
+
+	/*
+	 * @PostMapping public ResponseEntity<Consulta> registrar(@RequestBody Consulta
+	 * p) throws Exception { Consulta obj = service.registrar(p); return new
+	 * ResponseEntity<>(obj, HttpStatus.CREATED); }
+	 */
+
 	@PostMapping
 	public ResponseEntity<Void> registrar(@Valid @RequestBody ConsultaListaExamenDTO dto) throws Exception {
 		Consulta c = mapper.map(dto.getConsulta(), Consulta.class);
-		List<Examen> examenes = mapper.map(dto.getLstExamen(), new TypeToken<List<Examen>>() {}.getType());
-		
+		List<Examen> examenes = mapper.map(dto.getLstExamen(), new TypeToken<List<Examen>>() {
+		}.getType());
+
 		Consulta obj = service.registrarTransaccional(c, examenes);
-		
-		//localhost:8080/pacientes/5
-		//URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdConsulta()).toUri();
+
+		// localhost:8080/pacientes/5
+		// URI location =
+		// ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdConsulta()).toUri();
 		return ResponseEntity.created(null).build();
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<ConsultaDTO> modificar(@Valid @RequestBody ConsultaDTO dto) throws Exception {
 		Consulta obj = service.listarPorId(dto.getIdConsulta());
-		
-		if(obj == null) {
+
+		if (obj == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO " + dto.getIdConsulta());
 		}
-		
-		Consulta p = mapper.map(dto, Consulta.class);		
+
+		Consulta p = mapper.map(dto, Consulta.class);
 		Consulta pac = service.modificar(p);
 		ConsultaDTO dtoResponse = mapper.map(pac, ConsultaDTO.class);
 		return new ResponseEntity<>(dtoResponse, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> eliminar(@PathVariable("id") Integer id) throws Exception {
 		Consulta obj = service.listarPorId(id);
-		
-		if(obj == null) {
+
+		if (obj == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO " + id);
 		}
 		service.eliminar(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	//@ResponseStatus(HttpStatus.NOT_FOUND)
+
+	// @ResponseStatus(HttpStatus.NOT_FOUND)
 	@GetMapping("/hateoas/{id}")
-	public EntityModel<ConsultaDTO> listarHateoas(@PathVariable("id") Integer id) throws Exception{
+	public EntityModel<ConsultaDTO> listarHateoas(@PathVariable("id") Integer id) throws Exception {
 		Consulta obj = service.listarPorId(id);
-		
-		if(obj == null) {
+
+		if (obj == null) {
 			throw new ModeloNotFoundException("ID NO ENCONTRADO " + id);
 		}
-		
+
 		ConsultaDTO dto = mapper.map(obj, ConsultaDTO.class);
-		
+
 		EntityModel<ConsultaDTO> recurso = EntityModel.of(dto);
-		//localhost:8080/pacientes/1
-		WebMvcLinkBuilder link1 = linkTo(methodOn(this.getClass()).listarPorId(id));		
-		recurso.add(link1.withRel("examen-info"));		
+		// localhost:8080/pacientes/1
+		WebMvcLinkBuilder link1 = linkTo(methodOn(this.getClass()).listarPorId(id));
+		recurso.add(link1.withRel("examen-info"));
 		return recurso;
 
 	}
-	
+
+	@GetMapping("/buscar")
+	public ResponseEntity<List<ConsultaDTO>> buscarFecha(@RequestParam(value = "fecha1") String fecha1,
+			@RequestParam(value = "fecha2") String fecha2) {
+		List<Consulta> consultas = new ArrayList<>();
+
+		consultas = service.buscarFecha(LocalDateTime.parse(fecha1), LocalDateTime.parse(fecha2));
+		List<ConsultaDTO> consultasDTO = mapper.map(consultas, new TypeToken<List<ConsultaDTO>>() {
+		}.getType());
+
+		return new ResponseEntity<>(consultasDTO, HttpStatus.OK);
+	}
+
+	@PostMapping("/buscar/otros")
+	public ResponseEntity<List<ConsultaDTO>> buscarOtro(@RequestBody FiltroConsultaDTO filtro) {
+		List<Consulta> consultas = new ArrayList<>();
+
+		consultas = service.buscar(filtro.getDni(), filtro.getNombreCompleto());
+
+		List<ConsultaDTO> consulasDTO = mapper.map(consultas, new TypeToken<List<ConsultaDTO>>() {
+		}.getType());
+
+		return new ResponseEntity<List<ConsultaDTO>>(consulasDTO, HttpStatus.OK);
+	}
+
+	@GetMapping(value = "/listarResumen")
+	public ResponseEntity<List<ConsultaResumenDTO>> listarResumen() {
+		List<ConsultaResumenDTO> consultas = new ArrayList<>();
+		consultas = service.listarResumen();
+		return new ResponseEntity<>(consultas, HttpStatus.OK);
+	}
+
 }

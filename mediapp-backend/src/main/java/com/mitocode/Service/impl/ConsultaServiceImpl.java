@@ -12,13 +12,13 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mitocode.Service.IConsultaService;
 import com.mitocode.dto.ConsultaResumenDTO;
 import com.mitocode.model.Consulta;
 import com.mitocode.model.Examen;
 import com.mitocode.repo.IConsultaExamenRepo;
 import com.mitocode.repo.IConsultaRepo;
 import com.mitocode.repo.IGenericRepo;
-import com.mitocode.Service.IConsultaService;
 
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;

@@ -30,6 +30,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mitocode.Service.IArchivoService;
+import com.mitocode.Service.IConsultaService;
 import com.mitocode.dto.ConsultaDTO;
 import com.mitocode.dto.ConsultaListaExamenDTO;
 import com.mitocode.dto.ConsultaResumenDTO;
@@ -38,8 +40,6 @@ import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Archivo;
 import com.mitocode.model.Consulta;
 import com.mitocode.model.Examen;
-import com.mitocode.Service.IArchivoService;
-import com.mitocode.Service.IConsultaService;
 
 @RestController
 @RequestMapping("/consultas")

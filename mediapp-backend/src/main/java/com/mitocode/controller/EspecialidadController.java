@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.mitocode.Service.IEspecialidadService;
 import com.mitocode.dto.EspecialidadDTO;
 import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Especialidad;
-import com.mitocode.Service.IEspecialidadService;
 
 
 @RestController

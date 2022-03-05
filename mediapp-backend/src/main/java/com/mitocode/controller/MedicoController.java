@@ -45,7 +45,7 @@ public class MedicoController {
 	@GetMapping
 	//@RequestMapping(value = "/" , method = RequestMethod.GET)
 	//@PreAuthorize("hasAuthority('ADMIN') or hasAuthority('USER')")
-	@PreAuthorize("@authServiceImpl.tieneAcceso('listar')")
+	//@PreAuthorize("@authServiceImpl.tieneAcceso('listar')")
 	public ResponseEntity<List<MedicoDTO>> listar() throws Exception {
 		List<MedicoDTO> lista = service.listar().stream().map(p -> mapper.map(p, MedicoDTO.class)).collect(Collectors.toList());
 		

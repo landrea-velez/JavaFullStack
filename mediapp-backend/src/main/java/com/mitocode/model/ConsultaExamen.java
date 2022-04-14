@@ -11,25 +11,25 @@ import javax.persistence.Table;
 public class ConsultaExamen {
 
 	@Id
-	private Consulta idConsulta;
+	private Consulta consulta;
 
 	@Id
-	private Examen idExamen;
+	private Examen examen;
 
-	public Consulta getIdConsulta() {
-		return idConsulta;
+	public Consulta getConsulta() {
+		return consulta;
 	}
 
-	public void setIdConsulta(Consulta idConsulta) {
-		this.idConsulta = idConsulta;
+	public void setConsulta(Consulta consulta) {
+		this.consulta = consulta;
 	}
 
-	public Examen getIdExamen() {
-		return idExamen;
+	public Examen getExamen() {
+		return examen;
 	}
 
-	public void setIdExamen(Examen idExamen) {
-		this.idExamen = idExamen;
+	public void setExamen(Examen examen) {
+		this.examen = examen;
 	}
 
 }

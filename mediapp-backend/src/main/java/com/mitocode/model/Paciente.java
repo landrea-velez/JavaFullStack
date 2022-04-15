@@ -41,11 +41,11 @@ public class Paciente {
 		this.idPaciente = idPaciente;
 	}
 
-	public String getNombre() {
+	public String getNombres() {
 		return nombres;
 	}
 
-	public void setNombre(String nombres) {
+	public void setNombres(String nombres) {
 		this.nombres = nombres;
 	}
 

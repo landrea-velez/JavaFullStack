@@ -22,8 +22,8 @@ public class ArchivoServiceImpl implements IArchivoService {
 	}
 
 	@Override
-	public byte[] leerArchivo(Integer idArchivo) {
-		Optional<Archivo> op = repo.findById(idArchivo);
+	public byte[] leerArchivo(Integer idArchivo) {		
+		Optional<Archivo> op = repo.findById(idArchivo);		
 		return op.isPresent() ? op.get().getValue() : new byte[0];
 	}
 

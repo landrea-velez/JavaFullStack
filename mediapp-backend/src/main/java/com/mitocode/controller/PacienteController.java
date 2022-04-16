@@ -27,10 +27,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.mitocode.Service.IPacienteService;
 import com.mitocode.dto.PacienteDTO;
 import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Paciente;
+import com.mitocode.service.IPacienteService;
 
 
 @RestController

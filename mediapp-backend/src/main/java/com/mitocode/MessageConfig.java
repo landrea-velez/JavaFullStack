@@ -23,7 +23,7 @@ public class MessageConfig {
 	}
 
 	// Establece x default un locale
-	@Bean
+	@Bean	
 	public LocaleResolver localeResolver() {
 		SessionLocaleResolver slr = new SessionLocaleResolver();
 		slr.setDefaultLocale(Locale.ROOT);
@@ -37,5 +37,5 @@ public class MessageConfig {
 		bean.setValidationMessageSource(messageSource());
 		return bean;
 	}
-
+	
 }

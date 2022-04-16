@@ -1,4 +1,4 @@
-package com.mitocode.Service.impl;
+package com.mitocode.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;

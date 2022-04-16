@@ -19,13 +19,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "consulta")
 public class Consulta {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idConsulta;
 
 	@ManyToOne
 	@JoinColumn(name = "id_paciente", nullable = false, foreignKey = @ForeignKey(name = "FK_consulta_paciente"))
-	private Paciente paciente;
+	private Paciente paciente; // JPQL Java Persistence Query Language
 
 	@ManyToOne
 	@JoinColumn(name = "id_medico", nullable = false, foreignKey = @ForeignKey(name = "FK_consulta_medico"))
@@ -35,11 +36,12 @@ public class Consulta {
 	@JoinColumn(name = "id_especialidad", nullable = false, foreignKey = @ForeignKey(name = "FK_consulta_especialidad"))
 	private Especialidad especialidad;
 
-	@Column(name = "num_consultorio", nullable = true, length = 3)
+	@Column(name = "num_consultorio", length = 3, nullable = true)
 	private String numConsultorio;
 
 	@Column(name = "fecha", nullable = false)
 	private LocalDateTime fecha;
+	// Spring boot 1.5 -> pom.xml jsr310
 
 	@OneToMany(mappedBy = "consulta", cascade = { CascadeType.ALL }, orphanRemoval = true)
 	private List<DetalleConsulta> detalleConsulta;
@@ -116,5 +118,7 @@ public class Consulta {
 		Consulta other = (Consulta) obj;
 		return Objects.equals(idConsulta, other.idConsulta);
 	}
+	
+	
 
 }

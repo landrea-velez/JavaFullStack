@@ -16,31 +16,26 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ExceptionResponse> manejarOtrasExcepciones(ModeloNotFoundException ex, WebRequest request) {
-		ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(),
-				request.getDescription(false));
+	public final ResponseEntity<ExceptionResponse> manejarTodasExcepciones(Exception ex, WebRequest request){		
+		ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));		
 		return new ResponseEntity<>(er, HttpStatus.INTERNAL_SERVER_ERROR);
-
 	}
-
+	
 	@ExceptionHandler(ModeloNotFoundException.class)
-	public ResponseEntity<ExceptionResponse> manejarModeloNotFounException(ModeloNotFoundException ex,
-			WebRequest request) {
-		ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(),
-				request.getDescription(false));
+	public ResponseEntity<ExceptionResponse> manejarModeloNotFoundException(ModeloNotFoundException ex, WebRequest request) {
+		ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(er, HttpStatus.NOT_FOUND);
-
 	}
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatus status, WebRequest request) {
-
-		String message = ex.getBindingResult().getAllErrors().stream().map(e -> e.getDefaultMessage().concat(", "))
-				.collect(Collectors.joining());
-
-		ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), message, request.getDescription(false));
+		
+		String mensaje = ex.getBindingResult().getAllErrors().stream().map(e -> e.getDefaultMessage().concat(", ")).collect(Collectors.joining());
+		
+		ExceptionResponse er = new ExceptionResponse(LocalDateTime.now(), mensaje, request.getDescription(false));
 		return new ResponseEntity<>(er, HttpStatus.BAD_REQUEST);
 	}
-
+	
+	
 }

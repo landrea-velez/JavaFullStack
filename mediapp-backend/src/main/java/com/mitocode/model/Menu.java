@@ -14,6 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "menu")
 public class Menu {
+
 	@Id
 	private Integer idMenu;
 
@@ -25,7 +26,7 @@ public class Menu {
 
 	@Column(name = "url", length = 50)
 	private String url;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "menu_rol", joinColumns = @JoinColumn(name = "id_menu", referencedColumnName = "idMenu"), inverseJoinColumns = @JoinColumn(name = "id_rol", referencedColumnName = "idRol"))
 	private List<Rol> roles;
@@ -54,7 +55,7 @@ public class Menu {
 		this.nombre = nombre;
 	}
 
-	public String isUrl() {
+	public String getUrl() {
 		return url;
 	}
 
@@ -69,11 +70,5 @@ public class Menu {
 	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
-
-	public String getUrl() {
-		return url;
-	}
-	
-	
 
 }

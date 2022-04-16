@@ -10,6 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "especialidad")
 public class Especialidad {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idEspecialidad;
@@ -17,15 +18,15 @@ public class Especialidad {
 	@Column(name = "nombre", nullable = false, length = 50)
 	private String nombre;
 
-	@Column(name = "descripcion", nullable = false, length = 150)
+	@Column(name = "descripcion", nullable = false, length = 50)
 	private String descripcion;
 
 	public Integer getIdEspecialidad() {
 		return idEspecialidad;
 	}
 
-	public void setIdEspecialidad(Integer idExamen) {
-		this.idEspecialidad = idExamen;
+	public void setIdEspecialidad(Integer idEspecialidad) {
+		this.idEspecialidad = idEspecialidad;
 	}
 
 	public String getNombre() {

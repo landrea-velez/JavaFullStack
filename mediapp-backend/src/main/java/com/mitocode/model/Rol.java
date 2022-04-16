@@ -8,14 +8,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "rol")
 public class Rol {
+
 	@Id
 	private Integer idRol;
 
 	@Column(name = "nombre", nullable = false, length = 15)
 	private String nombre;
 
-	@Column(name = "descripcion", nullable = false, length = 150)
-	private String descripcion;
+	@Column(name = "descripcion", nullable = true, length = 150)
+	private String descricpion;
 
 	public Integer getIdRol() {
 		return idRol;
@@ -33,12 +34,12 @@ public class Rol {
 		this.nombre = nombre;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public String getDescricpion() {
+		return descricpion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setDescricpion(String descricpion) {
+		this.descricpion = descricpion;
 	}
 
 }

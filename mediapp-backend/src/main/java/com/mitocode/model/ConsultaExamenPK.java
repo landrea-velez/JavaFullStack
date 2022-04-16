@@ -35,6 +35,5 @@ public class ConsultaExamenPK implements Serializable {
 			return false;
 		ConsultaExamenPK other = (ConsultaExamenPK) obj;
 		return Objects.equals(consulta, other.consulta) && Objects.equals(examen, other.examen);
-	}
-
+	}	
 }

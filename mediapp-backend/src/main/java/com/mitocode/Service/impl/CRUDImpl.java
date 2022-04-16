@@ -2,21 +2,21 @@ package com.mitocode.Service.impl;
 
 import java.util.List;
 
-import com.mitocode.Service.ICRUD;
 import com.mitocode.repo.IGenericRepo;
+import com.mitocode.Service.ICRUD;
 
-public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID> {
+public abstract class CRUDImpl<T, ID> implements ICRUD<T, ID>{
 
 	protected abstract IGenericRepo<T, ID> getRepo();
-
+	
 	@Override
-	public T registrar(T t) throws Exception {
-		return getRepo().save(t);
+	public T registrar(T p) throws Exception {
+		return getRepo().save(p);
 	}
 
 	@Override
-	public T modificar(T t) throws Exception {
-		return getRepo().save(t);
+	public T modificar(T p) throws Exception {
+		return getRepo().save(p);
 	}
 
 	@Override

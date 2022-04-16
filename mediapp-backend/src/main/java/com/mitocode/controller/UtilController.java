@@ -26,10 +26,10 @@ public class UtilController {
 
 	@Autowired
 	private HttpServletResponse httpServletResponse;
-
+	
 	// Ejemplo de cambiar idioma
 	@GetMapping("/locale/{loc}")
-	public ResponseEntity<Void> cambiarIdioma(@PathVariable("loc") String loc) {
+	public ResponseEntity<Void> cambiarIdioma(@PathVariable("loc") String loc){
 		Locale userLocale = null;
 
 		switch (loc) {
@@ -47,5 +47,4 @@ public class UtilController {
 		localeResolver.setLocale(httpServletRequest, httpServletResponse, userLocale);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
-
 }

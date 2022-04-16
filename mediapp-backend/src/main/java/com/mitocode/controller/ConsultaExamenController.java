@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mitocode.Service.IConsultaExamenService;
 import com.mitocode.dto.ConsultaExamenDTO;
 import com.mitocode.model.ConsultaExamen;
+import com.mitocode.service.IConsultaExamenService;
 
 @RestController
 @RequestMapping("/consultaexamenes")

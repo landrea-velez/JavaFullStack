@@ -22,3 +22,4 @@ public interface IConsultaExamenRepo extends IGenericRepo<ConsultaExamen, Intege
 	//{consulta, examen},
 	//{consulta, examen}]
 }
+

@@ -12,6 +12,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "examen")
 public class Examen {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer idExamen;
@@ -19,7 +20,7 @@ public class Examen {
 	@Column(name = "nombre", nullable = false, length = 50)
 	private String nombre;
 
-	@Column(name = "descripcion", nullable = false, length = 150)
+	@Column(name = "descripcion", nullable = true, length = 150)
 	private String descripcion;
 
 	public Integer getIdExamen() {
@@ -63,4 +64,5 @@ public class Examen {
 		return Objects.equals(idExamen, other.idExamen);
 	}
 
+	
 }

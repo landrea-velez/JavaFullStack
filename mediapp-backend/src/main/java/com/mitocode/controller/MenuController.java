@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mitocode.dto.MenuDTO;
 import com.mitocode.model.Menu;
-import com.mitocode.Service.IMenuService;
+import com.mitocode.service.IMenuService;
 
 @RestController
 @RequestMapping("/menus")

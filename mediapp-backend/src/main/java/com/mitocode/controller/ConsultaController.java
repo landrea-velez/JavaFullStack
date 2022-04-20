@@ -38,8 +38,8 @@ import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Archivo;
 import com.mitocode.model.Consulta;
 import com.mitocode.model.Examen;
-import com.mitocode.service.IArchivoService;
-import com.mitocode.service.IConsultaService;
+import com.mitocode.Service.IArchivoService;
+import com.mitocode.Service.IConsultaService;
 
 @RestController
 @RequestMapping("/consultas")

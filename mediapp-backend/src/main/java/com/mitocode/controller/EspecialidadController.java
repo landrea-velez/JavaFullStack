@@ -28,7 +28,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.mitocode.dto.EspecialidadDTO;
 import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Especialidad;
-import com.mitocode.service.IEspecialidadService;
+import com.mitocode.Service.IEspecialidadService;
 
 
 @RestController

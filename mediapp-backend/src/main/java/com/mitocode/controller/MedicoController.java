@@ -29,7 +29,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.mitocode.dto.MedicoDTO;
 import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Medico;
-import com.mitocode.service.IMedicoService;
+import com.mitocode.Service.IMedicoService;
 
 
 @RestController

@@ -28,7 +28,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.mitocode.dto.ExamenDTO;
 import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Examen;
-import com.mitocode.service.IExamenService;
+import com.mitocode.Service.IExamenService;
 
 
 @RestController

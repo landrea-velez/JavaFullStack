@@ -30,7 +30,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.mitocode.dto.PacienteDTO;
 import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Paciente;
-import com.mitocode.service.IPacienteService;
+import com.mitocode.Service.IPacienteService;
 
 
 @RestController

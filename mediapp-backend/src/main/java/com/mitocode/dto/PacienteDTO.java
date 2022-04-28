@@ -37,7 +37,7 @@ public class PacienteDTO {
 	@Email
 	private String email;
 
-	@Size(min = 9, max = 9)
+	@Size(min = 9, max = 30)
 	// @Pattern(regexp = "")
 	private String telefono;
 

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mitocode.dto.ConsultaExamenDTO;
 import com.mitocode.model.ConsultaExamen;
-import com.mitocode.service.IConsultaExamenService;
+import com.mitocode.Service.IConsultaExamenService;
 
 @RestController
 @RequestMapping("/consultaexamenes")

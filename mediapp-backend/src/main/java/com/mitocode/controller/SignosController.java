@@ -11,6 +11,8 @@ import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.mitocode.Service.ISignosService;
+import com.mitocode.dto.PacienteDTO;
 import com.mitocode.dto.SignosDTO;
 import com.mitocode.exception.ModeloNotFoundException;
 import com.mitocode.model.Signos;
@@ -115,6 +118,13 @@ public class SignosController {
 			recurso.add(link1.withRel("signos-info"));		
 			return recurso;
 
+		}
+		
+		@GetMapping("/pageable")
+		public ResponseEntity<Page<SignosDTO>> listarPageable(Pageable page) throws Exception{
+			Page<SignosDTO> signos = service.listarPageable(page).map(p -> mapper.map(p, SignosDTO.class));
+			
+			return new ResponseEntity<>(signos, HttpStatus.OK);
 		}
 
 }

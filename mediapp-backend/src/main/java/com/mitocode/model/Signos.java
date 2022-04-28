@@ -28,7 +28,7 @@ public class Signos {
 	@Column(name = "fecha", nullable = false)
 	private LocalDateTime fecha;
 	
-	@Column(name = "temperatura", length = 3, nullable = false)
+	@Column(name = "temperatura", length = 4, nullable = false)
 	private String temperatura;
 	
 	@Column(name = "pulso", length = 4, nullable = false)
